@@ -1,4 +1,4 @@
 cd grading
 pip install -r requirements.txt
 
-python grading/grading.py "main"
+python grading.py "../main"
