@@ -1,0 +1,4 @@
+env
+exercises
+rubrics/__pycache__
+*.sqlite
