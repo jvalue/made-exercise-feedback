@@ -20,3 +20,6 @@ To run the automated grading, first activite the virtual env, then execute gradi
 
 # Use with CI
 To use the automated grading feedback in student repositories in AMSE, use the GitHub Actions workflow in`ci/grading-feedback.yml`. It sets up a GitHub action with Python 11 and Jayvee and then executes `./run_grading.sh`.
+
+# Notes
+- The SQLAlchemy version <2 in requirements.txt is by design, see https://levelup.gitconnected.com/how-to-fix-attributeerror-optionengine-object-has-no-attribute-execute-in-pandas-eb635fbb89e4.
