@@ -1,5 +1,5 @@
-# AMSE Automatic Grading
-This repository contains code to automatically grade exercise submissions for the AMSE/SAKI course at FAU Erlangen-Nürnberg.
+# AMSE Automatic Exercise Feedback
+This repository contains code to automatically give feedback for exercise submissions for the AMSE/SAKI course at FAU Erlangen-Nürnberg.
 
 # Install
 Grading code is tested and supposed to run with the latest Python LTS version (3.11 at the time of writing, check https://devguide.python.org/versions/).
