@@ -13,7 +13,7 @@ Use [venv](https://docs.python.org/3/library/venv.html) to manage a virtual envi
 3. Install dependencies using pip (inside the virtual env): `pip install -r requirements.txt`.
 
 # Execute
-To run the automated grading, first activite the virtual env, then execute grading.py with an optional work directory as first argument.
+To run the automated grading, first activate the virtual env, then execute grading.py with an optional work directory as first argument.
 
 1. `source env/bin/activate`
 2. `python grading.py`
