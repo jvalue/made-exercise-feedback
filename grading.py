@@ -7,8 +7,9 @@ def gradeExercise(rubricFactory, expectedModels, expectedOutputFile, expectedOut
         os.remove(expectedOutputFile)
 
     for expectedModel in expectedModels:
+        print('Looking for {} to execute.'.format(expectedModel))
         if os.path.isfile(expectedModel):
-            print('Found {}, executing model...'.format(expectedModel))
+            print('[SUCCESS] Found {}, executing.'.format(expectedModel))
             if (expectedModel.endswith('.py')):
                 os.system('python {}'.format(expectedModel))
                 break
@@ -16,13 +17,15 @@ def gradeExercise(rubricFactory, expectedModels, expectedOutputFile, expectedOut
                 os.system('jv {}'.format(expectedModel))
                 break
             else:
-                print('Could not find interpreter for model: {}. Skipping.'.format(expectedModel))
+                print('[ERROR] Could not find interpreter for model: {}.'.format(expectedModel))
+                print('Skipping.')
                 return
     
+    print('Looking for {} to grade.'.format(expectedOutputFile))
     if os.path.isfile(expectedOutputFile):
-        print('Found output file {}, grading...'.format(expectedOutputFile))
+        print('[SUCCESS] Found output file {}, grading...'.format(expectedOutputFile))
     else:
-        print('Can not find expected output file: {}. Make sure your model generates it correctly!'.format(expectedOutputFile))
+        print('[ERROR] Can not find expected output file: {}. Make sure your model generates it correctly!'.format(expectedOutputFile))
         print('Skipping.')
         return
 
