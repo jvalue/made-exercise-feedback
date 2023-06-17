@@ -42,6 +42,7 @@ def buildExercise3Rubric() -> GradingRubric:
     def ensureEncoding(df: pd.DataFrame) -> int:
         if 'Düren, Landkreis' in df['name'].values:
             return 2
+        return 0
 
     def ensureValidCommunityIdentificationNumber(df: pd.DataFrame) -> int:
         if 'CIN' in df.columns and df['CIN'].str.match(r'.{5}').all():
