@@ -51,10 +51,10 @@ def buildExercise4Rubric() -> GradingRubric:
         g1 = df[(df['Geraet'] == 85) & (df['Monat'] == 6)]
         g2 = df[(df['Geraet'] == 7) & (df['Monat'] == 8)]
 
-        if g1.shape[0] == 1 and g1['Temperatur'].values[0] == 65.3 and g1['Batterietemperatur'].values[0] == 93.2:
+        if g1.shape[0] == 1 and abs(g1['Temperatur'].values[0] - 65.3) < 0.1 and abs(g1['Batterietemperatur'].values[0] - 93.2) < 0.1:
             result += 1
 
-        if g2.shape[0] == 1 and g2['Temperatur'].values[0] == 68.18 and g2['Batterietemperatur'].values[0] == 78.44:
+        if g2.shape[0] == 1 and abs(g2['Temperatur'].values[0] - 68.18) < 0.1 and abs(g2['Batterietemperatur'].values[0] - 78.44) < 0.1:
             result += 1
 
         return result
