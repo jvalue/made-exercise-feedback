@@ -71,7 +71,7 @@ def buildExercise4Rubric() -> GradingRubric:
     rubric.addCheck("Shape", ensureColumns, 2, "Ensure all 7 columns of the source data are imported.")
     rubric.addCheck("Shape", ensureRows, 2, "Ensure all 4872 complete data points of the source data are imported.")
     rubric.addCheck("Types", ensureTypes, 7, "Ensure all columns have a fitting basic data type.")
-    rubric.addCheck("Types", ensureTransformTemperature, 2, "Ensure temperatures are correctly transformed to celcius.")
+    rubric.addCheck("Types", ensureTransformTemperature, 2, "Ensure temperatures are correctly transformed to fahrenheit.")
     rubric.addCheck("Quality", ensureNoEmptyValues, 2, "Ensure no empty values are included in the dataset.")
 
     return rubric
