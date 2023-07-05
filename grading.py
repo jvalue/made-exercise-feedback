@@ -2,6 +2,7 @@ from rubrics.Exercise1Rubric import buildExercise1Rubric
 from rubrics.Exercise2Rubric import buildExercise2Rubric
 from rubrics.Exercise3Rubric import buildExercise3Rubric
 from rubrics.Exercise4Rubric import buildExercise4Rubric
+from rubrics.Exercise5Rubric import buildExercise5Rubric
 import os
 import sys
 
@@ -44,4 +45,5 @@ if (len(sys.argv) > 1):
 #gradeExercise(buildExercise1Rubric, ['exercises/exercise1.py', 'exercises/exercise1.jv'], 'airports.sqlite', 'airports')
 #gradeExercise(buildExercise2Rubric, ['exercises/exercise2.py', 'exercises/exercise2.jv'], 'trainstops.sqlite', 'trainstops')
 #gradeExercise(buildExercise3Rubric, ['exercises/exercise3.py', 'exercises/exercise3.jv'], 'cars.sqlite', 'cars')
-gradeExercise(buildExercise4Rubric, ['exercises/exercise4.py', 'exercises/exercise4.jv'], 'temperatures.sqlite', 'temperatures')
+#gradeExercise(buildExercise4Rubric, ['exercises/exercise4.py', 'exercises/exercise4.jv'], 'temperatures.sqlite', 'temperatures')
+gradeExercise(buildExercise5Rubric, ['exercises/exercise5.py', 'exercises/exercise5.jv'], 'gtfs.sqlite', 'stops')
