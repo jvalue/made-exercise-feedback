@@ -51,6 +51,7 @@ def buildExercise5Rubric() -> GradingRubric:
     def ensureEncoding(df: pd.DataFrame) -> int:
         if 'Sickels Sägewerk' in df['stop_name'].values:
             return 1
+        return 0
 
 
     rubric = GradingRubric('Exercise 5')
