@@ -39,7 +39,7 @@ class GradingRubric:
         return self
     
     def getConsoleOutput(self) -> str:
-        output = 'Grading {}\n'.format(self.exerciseName)
+        output = 'Feedback for {}\n'.format(self.exerciseName)
         output += '\tOverall points {} of {}\n'.format(self.exerciseResult['pointsAchieved'], self.exerciseResult['maxPoints'])
         output += '\t---\n'
         output += '\tBy category:\n'

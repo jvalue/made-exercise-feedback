@@ -1,5 +1,5 @@
-# AMSE Automatic Exercise Feedback
-This repository contains code to automatically give feedback for exercise submissions for the AMSE/SAKI course at FAU Erlangen-Nürnberg.
+# MADE Automatic Exercise Feedback
+This repository contains code to automatically give feedback for exercise submissions for the MADE course at FAU Erlangen-Nürnberg.
 
 # Install
 Grading code is tested and supposed to run with the latest Python LTS version (3.11 at the time of writing, check https://devguide.python.org/versions/).
@@ -19,7 +19,7 @@ To run the automated grading, first activate the virtual env, then execute gradi
 2. `python grading.py`
 
 # Use with CI
-To use the automated grading feedback in student repositories in AMSE, use the GitHub Actions workflow in`ci/grading-feedback.yml`. It sets up a GitHub action with Python 11 and Jayvee and then executes `./run_grading.sh`.
+To use the automated grading feedback in student repositories in MADE, use the GitHub Actions workflow in`ci/grading-feedback.yml`. It sets up a GitHub action with Python 11 and Jayvee and then executes `./run_grading.sh`.
 
 # Notes
 - The SQLAlchemy version <2 in requirements.txt is by design, see https://levelup.gitconnected.com/how-to-fix-attributeerror-optionengine-object-has-no-attribute-execute-in-pandas-eb635fbb89e4.

@@ -21,7 +21,7 @@ def gradeExercise(rubricFactory, expectedModels, expectedOutputFile, expectedOut
                 os.system('jv {}'.format(expectedModel))
                 break
             else:
-                print('[ERROR] Could not find interpreter for model: {}.'.format(expectedModel))
+                print('[INFO] Could not find interpreter for model: {}.'.format(expectedModel))
                 print('Skipping.')
                 return
     
@@ -42,8 +42,8 @@ def gradeExercise(rubricFactory, expectedModels, expectedOutputFile, expectedOut
 if (len(sys.argv) > 1):
     os.chdir(sys.argv[1])
 
-#gradeExercise(buildExercise1Rubric, ['exercises/exercise1.py', 'exercises/exercise1.jv'], 'airports.sqlite', 'airports')
-#gradeExercise(buildExercise2Rubric, ['exercises/exercise2.py', 'exercises/exercise2.jv'], 'trainstops.sqlite', 'trainstops')
-#gradeExercise(buildExercise3Rubric, ['exercises/exercise3.py', 'exercises/exercise3.jv'], 'cars.sqlite', 'cars')
-#gradeExercise(buildExercise4Rubric, ['exercises/exercise4.py', 'exercises/exercise4.jv'], 'temperatures.sqlite', 'temperatures')
+gradeExercise(buildExercise1Rubric, ['exercises/exercise1.py', 'exercises/exercise1.jv'], 'airports.sqlite', 'airports')
+gradeExercise(buildExercise2Rubric, ['exercises/exercise2.py', 'exercises/exercise2.jv'], 'trainstops.sqlite', 'trainstops')
+gradeExercise(buildExercise3Rubric, ['exercises/exercise3.py', 'exercises/exercise3.jv'], 'cars.sqlite', 'cars')
+gradeExercise(buildExercise4Rubric, ['exercises/exercise4.py', 'exercises/exercise4.jv'], 'temperatures.sqlite', 'temperatures')
 gradeExercise(buildExercise5Rubric, ['exercises/exercise5.py', 'exercises/exercise5.jv'], 'gtfs.sqlite', 'stops')
