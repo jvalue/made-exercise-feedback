@@ -6,31 +6,34 @@ from rubrics.Exercise5Rubric import buildExercise5Rubric
 import os
 import sys
 
-def gradeExercise(rubricFactory, expectedModels, expectedOutputFile, expectedOutputTable):
+def gradeExercise(exNumber, rubricFactory, expectedModels, expectedOutputFile, expectedOutputTable):
+    print(f'Preparing feedback for Exercise {exNumber}:')
+    print('[INFO] If this exercise does not need to be submitted yet, you can ignore all output after this.')
     if os.path.isfile(expectedOutputFile):
         os.remove(expectedOutputFile)
 
     for expectedModel in expectedModels:
-        print('Looking for {} to execute.'.format(expectedModel))
+        print(f'\tLooking for {expectedModel} to execute.')
         if os.path.isfile(expectedModel):
-            print('[SUCCESS] Found {}, executing.'.format(expectedModel))
+            print(f'\t[SUCCESS] Found {expectedModel}, executing.')
             if (expectedModel.endswith('.py')):
-                os.system('python {}'.format(expectedModel))
+                os.system(f'python {expectedModel}')
                 break
             elif (expectedModel.endswith('.jv')):
-                os.system('jv {}'.format(expectedModel))
+                os.system(f'jv {expectedModel}')
                 break
             else:
-                print('[INFO] Could not find interpreter for model: {}.'.format(expectedModel))
-                print('Skipping.')
+                print(f'\t[INFO] Could not find interpreter for model: {expectedModel}.')
+                print('\tSkipping.')
                 return
     
-    print('Looking for {} to grade.'.format(expectedOutputFile))
+    print(f'\tLooking for {expectedOutputFile} to grade.')
     if os.path.isfile(expectedOutputFile):
-        print('[SUCCESS] Found output file {}, grading...'.format(expectedOutputFile))
+        print(f'\t[SUCCESS] Found output file {expectedOutputFile}, grading...')
     else:
-        print('[ERROR] Can not find expected output file: {}. Make sure your model generates it correctly!'.format(expectedOutputFile))
-        print('Skipping.')
+        print(f'\t[ERROR] Can not find expected output file: {expectedOutputFile}.')
+        print('\tMake sure your model generates it as described in the exercise!')
+        print('\tSkipping.')
         return
 
     feedback = rubricFactory()\
@@ -42,8 +45,8 @@ def gradeExercise(rubricFactory, expectedModels, expectedOutputFile, expectedOut
 if (len(sys.argv) > 1):
     os.chdir(sys.argv[1])
 
-gradeExercise(buildExercise1Rubric, ['exercises/exercise1.py', 'exercises/exercise1.jv'], 'airports.sqlite', 'airports')
-gradeExercise(buildExercise2Rubric, ['exercises/exercise2.py', 'exercises/exercise2.jv'], 'trainstops.sqlite', 'trainstops')
-gradeExercise(buildExercise3Rubric, ['exercises/exercise3.py', 'exercises/exercise3.jv'], 'cars.sqlite', 'cars')
-gradeExercise(buildExercise4Rubric, ['exercises/exercise4.py', 'exercises/exercise4.jv'], 'temperatures.sqlite', 'temperatures')
-gradeExercise(buildExercise5Rubric, ['exercises/exercise5.py', 'exercises/exercise5.jv'], 'gtfs.sqlite', 'stops')
+gradeExercise(1, buildExercise1Rubric, ['exercises/exercise1.py', 'exercises/exercise1.jv'], 'airports.sqlite', 'airports')
+gradeExercise(2, buildExercise2Rubric, ['exercises/exercise2.py', 'exercises/exercise2.jv'], 'trainstops.sqlite', 'trainstops')
+gradeExercise(3, buildExercise3Rubric, ['exercises/exercise3.py', 'exercises/exercise3.jv'], 'cars.sqlite', 'cars')
+gradeExercise(4, buildExercise4Rubric, ['exercises/exercise4.py', 'exercises/exercise4.jv'], 'temperatures.sqlite', 'temperatures')
+gradeExercise(5, buildExercise5Rubric, ['exercises/exercise5.py', 'exercises/exercise5.jv'], 'gtfs.sqlite', 'stops')
