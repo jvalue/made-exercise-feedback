@@ -14,7 +14,7 @@ def buildExercise5Rubric() -> GradingRubric:
             return 0
 
     def ensureRows(df: pd.DataFrame) -> int:
-        if len(df.index) == 406:
+        if len(df.index) == 400:
             return 2
         else:
             return 0
@@ -57,7 +57,7 @@ def buildExercise5Rubric() -> GradingRubric:
     rubric = GradingRubric('Exercise 5')
 
     rubric.addCheck("Shape", ensureColumns, 2, "Ensure all 5 columns of the source data are imported.")
-    rubric.addCheck("Shape", ensureRows, 2, "Ensure all 406 complete data points of the source data are imported.")
+    rubric.addCheck("Shape", ensureRows, 2, "Ensure all 400 complete data points of the source data are imported.")
     rubric.addCheck("Types", ensureTypes, 5, "Ensure all columns have a fitting basic data type.")
     rubric.addCheck("Quality", ensureNoEmptyValues, 2, "Ensure no empty values are included in the dataset.")
     rubric.addCheck("Quality", ensureZoneId, 2, "Ensure only stops from the right zone are included in the dataset.")
