@@ -49,3 +49,6 @@ class GradingRubric:
                 output += '\t\t\tHint: {}\n'.format(hint)
 
         return output
+
+    def getScore(self) -> str:
+        return '{}%'.format((self.exerciseResult['pointsAchieved'] / self.exerciseResult['maxPoints']) * 100)
