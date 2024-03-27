@@ -6,7 +6,7 @@ from rubrics.Exercise5Rubric import buildExercise5Rubric
 import os
 import sys
 
-def appendFeedbackToFile(exNumber, value):
+def addActionOutput(exNumber, value):
     key = f"score_ex{exNumber}"
     if "GITHUB_OUTPUT" in os.environ :
         with open(os.environ["GITHUB_OUTPUT"], "a") as f :
@@ -40,7 +40,7 @@ def gradeExercise(
                     f"\t[INFO] Could not find interpreter for model: {expectedModel}."
                 )
                 print("\tSkipping.")
-                appendFeedbackToFile(exNumber, "file_format_not_supported")
+                addActionOutput(exNumber, "file_format_not_supported")
                 return
 
     print(f"\tLooking for {expectedOutputFile} to grade.")
@@ -50,7 +50,7 @@ def gradeExercise(
         print(f"\t[ERROR] Can not find expected output file: {expectedOutputFile}.")
         print("\tMake sure your model generates it as described in the exercise!")
         print("\tSkipping.")
-        appendFeedbackToFile(exNumber, "sink_file_not_found")
+        addActionOutput(exNumber, "sink_file_not_found")
         return
 
     gradedRubric = rubricFactory().gradeData("sqlite:///{}".format(expectedOutputFile), expectedOutputTable)
@@ -60,7 +60,7 @@ def gradeExercise(
 
     print("")
     print(feedback)
-    appendFeedbackToFile(exNumber, gradedRubric.getScore())
+    addActionOutput(exNumber, gradedRubric.getScore())
 
 if len(sys.argv) > 1:
     os.chdir(sys.argv[1])
