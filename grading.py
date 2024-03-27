@@ -32,6 +32,7 @@ def gradeExercise(
                     f"\t[INFO] Could not find interpreter for model: {expectedModel}."
                 )
                 print("\tSkipping.")
+                print("##[set-output name=score_ex{};]{}".format(exNumber, "error"))
                 return
 
     print(f"\tLooking for {expectedOutputFile} to grade.")
@@ -41,16 +42,18 @@ def gradeExercise(
         print(f"\t[ERROR] Can not find expected output file: {expectedOutputFile}.")
         print("\tMake sure your model generates it as described in the exercise!")
         print("\tSkipping.")
+        print("##[set-output name=score_ex{};]{}".format(exNumber, "error"))
         return
 
+    gradedRubric = rubricFactory().gradeData("sqlite:///{}".format(expectedOutputFile), expectedOutputTable)
     feedback = (
-        rubricFactory()
-        .gradeData("sqlite:///{}".format(expectedOutputFile), expectedOutputTable)
-        .getConsoleOutput()
+        gradedRubric.getConsoleOutput()
     )
 
     print("")
     print(feedback)
+    print("")
+    print("##[set-output name=score_ex{};]{}".format(exNumber, gradedRubric.getScore()))
 
 
 if len(sys.argv) > 1:
