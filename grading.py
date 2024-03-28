@@ -6,12 +6,13 @@ from rubrics.Exercise5Rubric import buildExercise5Rubric
 import os
 import sys
 
+
 def addActionOutput(exNumber, value):
     key = f"score_ex{exNumber}"
-    if "GITHUB_OUTPUT" in os.environ :
-        with open(os.environ["GITHUB_OUTPUT"], "a") as f :
+    if "GITHUB_OUTPUT" in os.environ:
+        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             print("{0}={1}".format(key, value), file=f)
-    else :
+    else:
         print("::set-output name={0}::{1}".format(key, value))
 
 
@@ -53,14 +54,15 @@ def gradeExercise(
         addActionOutput(exNumber, "sink_file_not_found")
         return
 
-    gradedRubric = rubricFactory().gradeData("sqlite:///{}".format(expectedOutputFile), expectedOutputTable)
-    feedback = (
-        gradedRubric.getConsoleOutput()
+    gradedRubric = rubricFactory().gradeData(
+        "sqlite:///{}".format(expectedOutputFile), expectedOutputTable
     )
+    feedback = gradedRubric.getConsoleOutput()
 
     print("")
     print(feedback)
     addActionOutput(exNumber, gradedRubric.getScore())
+
 
 if len(sys.argv) > 1:
     os.chdir(sys.argv[1])
@@ -68,35 +70,35 @@ if len(sys.argv) > 1:
 gradeExercise(
     1,
     buildExercise1Rubric,
-    ["exercises/exercise1.py", "exercises/exercise1.jv"],
+    ["exercises/exercise1.jv"],
     "airports.sqlite",
     "airports",
 )
 gradeExercise(
     2,
     buildExercise2Rubric,
-    ["exercises/exercise2.py", "exercises/exercise2.jv"],
-    "trainstops.sqlite",
-    "trainstops",
+    ["exercises/exercise2.jv"],
+    "trees.sqlite",
+    "trees",
 )
 gradeExercise(
     3,
     buildExercise3Rubric,
-    ["exercises/exercise3.py", "exercises/exercise3.jv"],
-    "cars.sqlite",
-    "cars",
+    ["exercises/exercise3.jv"],
+    "goodsTransportedByTrain.sqlite",
+    "goods",
 )
 gradeExercise(
     4,
     buildExercise4Rubric,
-    ["exercises/exercise4.py", "exercises/exercise4.jv"],
+    ["exercises/exercise4.jv"],
     "temperatures.sqlite",
     "temperatures",
 )
 gradeExercise(
     5,
     buildExercise5Rubric,
-    ["exercises/exercise5.py", "exercises/exercise5.jv"],
+    ["exercises/exercise5.jv"],
     "gtfs.sqlite",
     "stops",
 )

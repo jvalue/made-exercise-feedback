@@ -5,9 +5,10 @@ from pandas.api.types import is_float_dtype
 
 from rubrics.GradingRubric import GradingRubric
 
+
 def buildExercise4Rubric() -> GradingRubric:
     def ensureColumns(df: pd.DataFrame) -> int:
-        if len(df.columns) == 7:
+        if len(df.columns) == 6:
             return 2
         else:
             return 0
@@ -22,13 +23,12 @@ def buildExercise4Rubric() -> GradingRubric:
         result = 0
 
         dtypes = {
-            'Geraet': is_integer_dtype,
-			'Hersteller': is_string_dtype,
-			'Model': is_string_dtype,
-			'Monat': is_integer_dtype,
-			'Temperatur': is_float_dtype,
-			'Batterietemperatur': is_float_dtype,
-			'Geraet aktiv': is_string_dtype,
+            "id": is_integer_dtype,
+            "producer": is_string_dtype,
+            "model": is_string_dtype,
+            "month": is_integer_dtype,
+            "temperature": is_float_dtype,
+            "battery_temperature": is_float_dtype,
         }
 
         for columnName in dtypes:
@@ -39,22 +39,30 @@ def buildExercise4Rubric() -> GradingRubric:
 
     def ensureTransformTemperature(df: pd.DataFrame) -> int:
         result = 0
-        
-        if not (
-            'Geraet' in df.columns
-            or 'Monat' in df.columns
-            or 'Temperatur' in df.columns
-            or 'Batterietemperatur' in df.columns
-        ) :
-            return
-        
-        g1 = df[(df['Geraet'] == 85) & (df['Monat'] == 6)]
-        g2 = df[(df['Geraet'] == 7) & (df['Monat'] == 8)]
 
-        if g1.shape[0] == 1 and abs(g1['Temperatur'].values[0] - 65.3) < 0.1 and abs(g1['Batterietemperatur'].values[0] - 93.2) < 0.1:
+        if not (
+            "id" in df.columns
+            or "month" in df.columns
+            or "temperature" in df.columns
+            or "battery_temperature" in df.columns
+        ):
+            return result
+
+        g1 = df[(df["id"] == 85) & (df["month"] == 6)]
+        g2 = df[(df["id"] == 7) & (df["month"] == 8)]
+
+        if (
+            g1.shape[0] == 1
+            and abs(g1["temperature"].values[0] - 65.3) < 0.1
+            and abs(g1["battery_temperature"].values[0] - 93.2) < 0.1
+        ):
             result += 1
 
-        if g2.shape[0] == 1 and abs(g2['Temperatur'].values[0] - 68.18) < 0.1 and abs(g2['Batterietemperatur'].values[0] - 78.44) < 0.1:
+        if (
+            g2.shape[0] == 1
+            and abs(g2["temperature"].values[0] - 68.18) < 0.1
+            and abs(g2["battery_temperature"].values[0] - 78.44) < 0.1
+        ):
             result += 1
 
         return result
@@ -65,13 +73,34 @@ def buildExercise4Rubric() -> GradingRubric:
         else:
             return 0
 
+    rubric = GradingRubric("Exercise 4")
 
-    rubric = GradingRubric('Exercise 4')
-
-    rubric.addCheck("Shape", ensureColumns, 2, "Ensure all 7 columns of the source data are imported.")
-    rubric.addCheck("Shape", ensureRows, 2, "Ensure all 4872 complete data points of the source data are imported.")
-    rubric.addCheck("Types", ensureTypes, 7, "Ensure all columns have a fitting basic data type.")
-    rubric.addCheck("Types", ensureTransformTemperature, 2, "Ensure temperatures are correctly transformed to fahrenheit.")
-    rubric.addCheck("Quality", ensureNoEmptyValues, 2, "Ensure no empty values are included in the dataset.")
+    rubric.addCheck(
+        "Shape",
+        ensureColumns,
+        2,
+        "Ensure all 6 columns of the source data are imported.",
+    )
+    rubric.addCheck(
+        "Shape",
+        ensureRows,
+        2,
+        "Ensure all 4872 complete data points of the source data are imported.",
+    )
+    rubric.addCheck(
+        "Types", ensureTypes, 6, "Ensure all columns have a fitting basic data type."
+    )
+    rubric.addCheck(
+        "Types",
+        ensureTransformTemperature,
+        2,
+        "Ensure temperatures are correctly transformed to fahrenheit.",
+    )
+    rubric.addCheck(
+        "Quality",
+        ensureNoEmptyValues,
+        2,
+        "Ensure no empty values are included in the dataset.",
+    )
 
     return rubric
