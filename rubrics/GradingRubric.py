@@ -13,8 +13,7 @@ class GradingRubric:
 
         self.categories[category].append({'check': check, 'maxPoints': maxPoints, 'errorHint': errorHint})
 
-    def gradeData(self, path: str, table: str):
-        df = pd.read_sql_table(table, path)
+    def gradeData(self, df: pd.DataFrame):
 
         self.exerciseResult = {
             'maxPoints': 0, 'pointsAchieved': 0,

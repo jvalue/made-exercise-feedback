@@ -5,6 +5,8 @@ from rubrics.Exercise4Rubric import buildExercise4Rubric
 from rubrics.Exercise5Rubric import buildExercise5Rubric
 import os
 import sys
+import sqlite3
+import pandas as pd
 
 
 def addActionOutput(exNumber, value):
@@ -54,9 +56,17 @@ def gradeExercise(
         addActionOutput(exNumber, "sink_file_not_found")
         return
 
-    gradedRubric = rubricFactory().gradeData(
-        "sqlite:///{}".format(expectedOutputFile), expectedOutputTable
-    )
+    connection = sqlite3.connect(expectedOutputFile)
+
+    try:
+        query = f"SELECT * FROM {expectedOutputTable}"
+        df = pd.read_sql_query(query, connection)
+    except Exception as e:
+        print(f"Exception for {expectedOutputFile}: {e}")
+        connection.close()
+        return
+
+    gradedRubric = rubricFactory().gradeData(df)
     feedback = gradedRubric.getConsoleOutput()
 
     print("")
