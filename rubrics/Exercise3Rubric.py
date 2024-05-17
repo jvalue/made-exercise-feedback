@@ -13,7 +13,7 @@ def buildExercise3Rubric() -> GradingRubric:
             return 0
 
     def ensureRows(df: pd.DataFrame) -> int:
-        if len(df.index) == 5971:
+        if len(df.index) == 941:
             return 2
         else:
             return 0
