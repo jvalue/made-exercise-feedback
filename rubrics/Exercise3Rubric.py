@@ -13,7 +13,7 @@ def buildExercise3Rubric() -> GradingRubric:
             return 0
 
     def ensureRows(df: pd.DataFrame) -> int:
-        if len(df.index) == 941:
+        if len(df.index) == 1448:
             return 2
         else:
             return 0
@@ -81,7 +81,7 @@ def buildExercise3Rubric() -> GradingRubric:
         "Shape",
         ensureRows,
         2,
-        "Ensure all 5971 complete data points of the source data are imported.",
+        "Ensure all 1448 complete data points of the source data are imported.",
     )
     rubric.addCheck(
         "Types", ensureTypes, 7, "Ensure all columns have a fitting basic data type."
