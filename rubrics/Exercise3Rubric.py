@@ -58,6 +58,10 @@ def buildExercise3Rubric() -> GradingRubric:
             "total",
         ]
 
+        # Convert all columns to numeric, coercing errors to NaN
+        # Otherwise calling .min might error on strings
+        df = df.apply(pd.to_numeric, errors="coerce")
+
         if int(df[columns].min().min()) > 0:
             return 2
 
