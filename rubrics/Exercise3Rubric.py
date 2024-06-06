@@ -38,7 +38,7 @@ def buildExercise3Rubric() -> GradingRubric:
         return result
 
     def ensureEncoding(df: pd.DataFrame) -> int:
-        if "Lüneburg" in df["goods_source"].values:
+        if "goods_source" in df.columns and "Lüneburg" in df["goods_source"].values:
             return 2
         return 0
 
@@ -57,6 +57,8 @@ def buildExercise3Rubric() -> GradingRubric:
             "abroad",
             "total",
         ]
+
+        df = df.reindex(columns=columns)
 
         # Convert all columns to numeric, coercing errors to NaN
         # Otherwise calling .min might error on strings
