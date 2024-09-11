@@ -9,15 +9,6 @@ import sqlite3
 import pandas as pd
 
 
-def addActionOutput(exNumber, value):
-    key = f"score_ex{exNumber}"
-    if "GITHUB_OUTPUT" in os.environ:
-        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-            print("{0}={1}".format(key, value), file=f)
-    else:
-        print("::set-output name={0}::{1}".format(key, value))
-
-
 def gradeExercise(
     exNumber, rubricFactory, expectedModels, expectedOutputFile, expectedOutputTable
 ):
@@ -43,7 +34,6 @@ def gradeExercise(
                     f"\t[INFO] Could not find interpreter for model: {expectedModel}."
                 )
                 print("\tSkipping.")
-                addActionOutput(exNumber, "file_format_not_supported")
                 return
 
     print(f"\tLooking for {expectedOutputFile} to grade.")
@@ -53,7 +43,6 @@ def gradeExercise(
         print(f"\t[ERROR] Can not find expected output file: {expectedOutputFile}.")
         print("\tMake sure your model generates it as described in the exercise!")
         print("\tSkipping.")
-        addActionOutput(exNumber, "sink_file_not_found")
         return
 
     connection = sqlite3.connect(expectedOutputFile)
@@ -71,7 +60,6 @@ def gradeExercise(
 
     print("")
     print(feedback)
-    addActionOutput(exNumber, gradedRubric.getScore())
 
 
 if len(sys.argv) > 1:
