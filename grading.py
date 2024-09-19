@@ -61,42 +61,63 @@ def gradeExercise(
     print("")
     print(feedback)
 
+if len(sys.argv) < 1:
+    print("Missing argument.\nUsage: python grading.py <exerciseId> <dir (optional)>")
+    exit(1)
 
-if len(sys.argv) > 1:
-    os.chdir(sys.argv[1])
+try:
+    exerciseId = int(sys.argv[1])
+except ValueError:
+    print("The argument provided is not an integer.")
+    exit(1)
 
-gradeExercise(
-    1,
-    buildExercise1Rubric,
-    ["exercises/exercise1.jv"],
-    "airports.sqlite",
-    "airports",
-)
-gradeExercise(
-    2,
-    buildExercise2Rubric,
-    ["exercises/exercise2.jv"],
-    "trees.sqlite",
-    "trees",
-)
-gradeExercise(
-    3,
-    buildExercise3Rubric,
-    ["exercises/exercise3.jv"],
-    "goodsTransportedByTrain.sqlite",
-    "goods",
-)
-gradeExercise(
-    4,
-    buildExercise4Rubric,
-    ["exercises/exercise4.jv"],
-    "temperatures.sqlite",
-    "temperatures",
-)
-gradeExercise(
-    5,
-    buildExercise5Rubric,
-    ["exercises/exercise5.jv"],
-    "gtfs.sqlite",
-    "stops",
-)
+if len(sys.argv) > 2:
+    os.chdir(sys.argv[2])
+
+match (exerciseId):
+    case 1:
+      gradeExercise(
+          1,
+          buildExercise1Rubric,
+          ["exercises/exercise1.jv"],
+          "airports.sqlite",
+          "airports",
+      )
+    case 2:
+      gradeExercise(
+          2,
+          buildExercise2Rubric,
+          ["exercises/exercise2.jv"],
+          "trees.sqlite",
+          "trees",
+      )
+    case 3:
+        gradeExercise(
+            3,
+            buildExercise3Rubric,
+            ["exercises/exercise3.jv"],
+            "goodsTransportedByTrain.sqlite",
+            "goods",
+        )
+    case 4:
+        gradeExercise(
+            4,
+            buildExercise4Rubric,
+            ["exercises/exercise4.jv"],
+            "temperatures.sqlite",
+            "temperatures",
+        )
+    case 5:
+        gradeExercise(
+            5,
+            buildExercise5Rubric,
+            ["exercises/exercise5.jv"],
+            "gtfs.sqlite",
+            "stops",
+        )
+    case _: 
+        print(f"No grading found for exercise with id {exerciseId}")
+
+
+
+
