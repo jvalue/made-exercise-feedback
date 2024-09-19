@@ -68,17 +68,13 @@ if len(sys.argv) < 1:
     print("Missing argument.\nUsage: python grading.py <exerciseId> <dir (optional)>")
     exit(1)
 
-try:
-    exerciseId = int(sys.argv[1])
-except ValueError:
-    print("The argument provided is not an integer.")
-    exit(1)
+exerciseId = sys.argv[1]
 
 if len(sys.argv) > 2:
     os.chdir(sys.argv[2])
 
 match (exerciseId):
-    case 1:
+    case "ex1":
       gradeExercise(
           1,
           buildExercise1Rubric,
@@ -86,7 +82,7 @@ match (exerciseId):
           "airports.sqlite",
           "airports",
       )
-    case 2:
+    case "ex2":
       gradeExercise(
           2,
           buildExercise2Rubric,
@@ -94,7 +90,7 @@ match (exerciseId):
           "trees.sqlite",
           "trees",
       )
-    case 3:
+    case "ex3":
         gradeExercise(
             3,
             buildExercise3Rubric,
@@ -102,7 +98,7 @@ match (exerciseId):
             "goodsTransportedByTrain.sqlite",
             "goods",
         )
-    case 4:
+    case "ex4":
         gradeExercise(
             4,
             buildExercise4Rubric,
@@ -110,7 +106,7 @@ match (exerciseId):
             "temperatures.sqlite",
             "temperatures",
         )
-    case 5:
+    case "ex5":
         gradeExercise(
             5,
             buildExercise5Rubric,
@@ -119,7 +115,7 @@ match (exerciseId):
             "stops",
         )
     case _: 
-        print(f"No grading found for exercise with id {exerciseId}")
+        print(f"No grading found for submission with id {exerciseId}")
 
 
 
