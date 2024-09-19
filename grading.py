@@ -21,20 +21,23 @@ def gradeExercise(
 
     for expectedModel in expectedModels:
         print(f"\tLooking for {expectedModel} to execute.")
-        if os.path.isfile(expectedModel):
-            print(f"\t[SUCCESS] Found {expectedModel}, executing.")
-            if expectedModel.endswith(".py"):
-                os.system(f"python {expectedModel}")
-                break
-            elif expectedModel.endswith(".jv"):
-                os.system(f"jv {expectedModel}")
-                break
-            else:
-                print(
-                    f"\t[INFO] Could not find interpreter for model: {expectedModel}."
-                )
-                print("\tSkipping.")
-                return
+        if not os.path.isfile(expectedModel):
+            print(f"\t[WARNING] Could not find file to grade: {expectedModel}")
+            break
+      
+        print(f"\t[SUCCESS] Found {expectedModel}, executing.")
+        if expectedModel.endswith(".py"):
+            os.system(f"python {expectedModel}")
+            break
+        elif expectedModel.endswith(".jv"):
+            os.system(f"jv {expectedModel}")
+            break
+        else:
+            print(
+                f"\t[INFO] Could not find interpreter for model: {expectedModel}."
+            )
+            print("\tSkipping.")
+            return
 
     print(f"\tLooking for {expectedOutputFile} to grade.")
     if os.path.isfile(expectedOutputFile):
