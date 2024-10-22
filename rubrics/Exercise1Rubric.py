@@ -8,7 +8,7 @@ from rubrics.GradingRubric import GradingRubric
 
 def buildExercise1Rubric() -> GradingRubric:
     def ensureColumns(df: pd.DataFrame) -> int:
-        if len(df.columns) == 13:
+        if len(df.columns) == 9:
             return 2
         else:
             return 0
@@ -32,10 +32,10 @@ def buildExercise1Rubric() -> GradingRubric:
             "Latitude": is_float_dtype,
             "Longitude": is_float_dtype,
             "Altitude": is_integer_dtype,
-            "Zeitzone": is_float_dtype,
-            "DST": is_string_dtype,
-            "Zeitzonen-Datenbank": is_string_dtype,
-            "geo_punkt": is_string_dtype,
+            # "Zeitzone": is_float_dtype,
+            # "DST": is_string_dtype,
+            # "Zeitzonen-Datenbank": is_string_dtype,
+            # "geo_punkt": is_string_dtype,
         }
 
         for columnName in dtypes:
@@ -50,7 +50,7 @@ def buildExercise1Rubric() -> GradingRubric:
         "Shape",
         ensureColumns,
         2,
-        "Ensure all 13 columns of the source data are imported.",
+        "Ensure all 9 columns of the source data are imported.",
     )
     rubric.addCheck(
         "Shape",
@@ -59,7 +59,7 @@ def buildExercise1Rubric() -> GradingRubric:
         "Ensure all 7847 complete data points of the source data are imported.",
     )
     rubric.addCheck(
-        "Types", ensureTypes, 13, "Ensure all columns have a fitting data type."
+        "Types", ensureTypes, 9, "Ensure all columns have a fitting data type."
     )
 
     return rubric
