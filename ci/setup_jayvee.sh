@@ -1,1 +1,1 @@
-npm i -g @jvalue/jayvee-interpreter@0.6.2
+npm i -g @jvalue/jayvee-interpreter@0.6.3
