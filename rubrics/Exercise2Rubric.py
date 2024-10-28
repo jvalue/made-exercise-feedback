@@ -13,7 +13,7 @@ def buildExercise2Rubric() -> GradingRubric:
             return 0
 
     def ensureRows(df: pd.DataFrame) -> int:
-        if len(df.index) == 175:
+        if len(df.index) == 61:
             return 2
         else:
             return 0
@@ -43,7 +43,10 @@ def buildExercise2Rubric() -> GradingRubric:
         return result
 
     def ensureValidStadtteil(df: pd.DataFrame) -> int:
-        if "stadtteil" in df.columns and df["stadtteil"].str.match(r"Furth-[.]*").all():
+        if (
+            "stadtteil" in df.columns
+            and df["stadtteil"].str.match(r"Vogelsang[.]*").all()
+        ):
             return 2
         else:
             return 0
@@ -75,7 +78,7 @@ def buildExercise2Rubric() -> GradingRubric:
         "Shape",
         ensureRows,
         2,
-        "Ensure all 175 complete data points of the source data are imported.",
+        "Ensure all 61 complete data points of the source data are imported.",
     )
     rubric.addCheck(
         "Shape",
