@@ -1,6 +1,7 @@
 from rubrics.Exercise1Rubric import buildExercise1Rubric
 from rubrics.Exercise2Rubric import buildExercise2Rubric
-from rubrics.Exercise3Rubric import buildExercise3Rubric
+from rubrics.Exercise3RubricGdp import buildExercise3RubricGdp
+from rubrics.Exercise3RubricBondIssuance import buildExercise3RubricBondIssuance
 from rubrics.Exercise4Rubric import buildExercise4Rubric
 from rubrics.Exercise5Rubric import buildExercise5Rubric
 import os
@@ -97,10 +98,17 @@ match (exerciseId):
     case 3:
         gradeExercise(
             3,
-            buildExercise3Rubric,
+            buildExercise3RubricBondIssuance,
             ["exercises/exercise3.jv"],
-            "goodsTransportedByTrain.sqlite",
-            "goods",
+            "country-stats.sqlite",
+            "bondIssuance",
+        )
+        gradeExercise(
+            3,
+            buildExercise3RubricGdp,
+            ["exercises/exercise3.jv"],
+            "country-stats.sqlite",
+            "gdpPerCapita",
         )
     case 4:
         gradeExercise(
