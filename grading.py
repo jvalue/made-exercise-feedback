@@ -64,21 +64,37 @@ def gradeExercise(
     print("")
     print(feedback)
 
+
+def gradeProjectWork(
+    pwNumber, expectedFiles
+):
+    print(f"[INFO] Preparing feedback for PROJECT WORK {pwNumber}:")
+    print(
+        "[INFO] If this project work does not need to be submitted yet, you can ignore all output after this."
+    )
+
+    for expectedFile in expectedFiles:
+        print(f"\tLooking for file {expectedFile}.")
+        if not os.path.isfile(expectedFile):
+            print(f"\t[ERROR] Could not find file: {expectedFile}")
+            break
+      
+        print(f"\t[SUCCESS] Found file: {expectedFile}.")
+
+    print("\t[INFO] That's all we can currently offer as quick feedback for this project work. The rest is manual grading at the end of the semester.")
+
+
 if len(sys.argv) < 1:
-    print("Missing argument.\nUsage: python grading.py <exerciseId> <dir (optional)>")
+    print("Missing argument.\nUsage: python grading.py <exerciseId/projectWorkId> <dir (optional)>")
     exit(1)
 
-try:
-    exerciseId = int(sys.argv[1])
-except ValueError:
-    print("The argument provided is not an integer.")
-    exit(1)
+exerciseId = sys.argv[1]
 
 if len(sys.argv) > 2:
     os.chdir(sys.argv[2])
 
 match (exerciseId):
-    case 1:
+    case "ex1":
       gradeExercise(
           1,
           buildExercise1Rubric,
@@ -86,7 +102,7 @@ match (exerciseId):
           "airports.sqlite",
           "airports",
       )
-    case 2:
+    case "ex2":
       gradeExercise(
           2,
           buildExercise2Rubric,
@@ -94,7 +110,7 @@ match (exerciseId):
           "trees.sqlite",
           "trees",
       )
-    case 3:
+    case "ex3":
         gradeExercise(
             3,
             buildExercise3Rubric,
@@ -102,7 +118,7 @@ match (exerciseId):
             "goodsTransportedByTrain.sqlite",
             "goods",
         )
-    case 4:
+    case "ex4":
         gradeExercise(
             4,
             buildExercise4Rubric,
@@ -110,7 +126,7 @@ match (exerciseId):
             "temperatures.sqlite",
             "temperatures",
         )
-    case 5:
+    case "ex5":
         gradeExercise(
             5,
             buildExercise5Rubric,
@@ -118,8 +134,43 @@ match (exerciseId):
             "gtfs.sqlite",
             "stops",
         )
+    case "pw2":
+        gradeProjectWork(
+            2,
+            ["project/project-plan.md"],
+        )
+    case "pw3":
+        gradeProjectWork(
+            3,
+            ["project/pipeline.sh"],
+        )
+    case "pw4":
+        gradeProjectWork(
+            4,
+            ["project/data-report.pdf"],
+        )
+    case "pw5":
+        gradeProjectWork(
+            5,
+            ["project/tests.sh"],
+        )
+    case "pw6":
+        gradeProjectWork(
+            6,
+            [".github/workflows/data-pipeline.yml"],
+        )
+    case "pw7":
+        gradeProjectWork(
+            7,
+            ["project/analysis-report.pdf"],
+        )
+    case "pw8":
+        gradeProjectWork(
+            8,
+            ["project/slides.pdf"],
+        )
     case _: 
-        print(f"No grading found for exercise with id {exerciseId}")
+        print(f"No grading found for submission with id {exerciseId}")
 
 
 

@@ -16,7 +16,7 @@ Use [venv](https://docs.python.org/3/library/venv.html) to manage a virtual envi
 To run the automated grading, first activate the virtual env, then execute grading.py with an optional work directory as first argument.
 
 1. `source env/bin/activate`
-2. `python grading.py <exerciseId>`
+2. `python grading.py <exerciseId/projectWorkId>`, e.g. `python grading.py ex1` 
 
 # Use with CI
 To use the automated grading feedback in student repositories in MADE, use the GitHub Actions workflow in`ci/grading-feedback.yml`. It sets up a GitHub action with Python 11 and Jayvee and then executes `./run_grading.sh`.
