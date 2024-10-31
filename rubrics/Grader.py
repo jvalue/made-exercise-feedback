@@ -21,6 +21,18 @@ class Grader:
                 if (pointsAchieved < checkData['maxPoints']):
                     self.resultPerCategory[category]['hints'].append(checkData['errorHint'])        
         return self
+    
+    def gradeMissingOutput(self, rubric: GradingRubric):
+        for category in rubric.categories:
+            if category not in self.resultPerCategory:
+              self.resultPerCategory[category] = {'maxPoints': 0, 'pointsAchieved': 0, 'hints': []}
+
+            for checkData in rubric.categories[category]:
+                self.resultPerCategory[category]['maxPoints'] += checkData['maxPoints']
+                self.resultPerCategory[category]['pointsAchieved'] += 0
+
+                self.resultPerCategory[category]['hints'].append('Output file or table not found. See logs above.')        
+        return self
       
     def totalAchievedPoints(self) -> int:
         totalPoints = 0

@@ -57,15 +57,26 @@ def gradeExercise(
     
 def gradeSubject(gradingSubject: GradingSubject, grader: Grader):
     print(f"\tLooking for {gradingSubject.expectedOutputFile} to grade.")
-    if os.path.isfile(gradingSubject.expectedOutputFile):
-        print(f"\t[SUCCESS] Found output file {gradingSubject.expectedOutputFile}, grading...")
-    else:
+    if not os.path.isfile(gradingSubject.expectedOutputFile):
         print(f"\t[ERROR] Can not find expected output file: {gradingSubject.expectedOutputFile}.")
         print("\tMake sure your model generates it as described in the exercise!")
         print("\tSkipping.")
+        gradedRubric = gradingSubject.rubricFactory()
+        grader.gradeMissingOutput(gradedRubric)
         return
 
+    print(f"\t[SUCCESS] Found output file {gradingSubject.expectedOutputFile}, grading...")
     connection = sqlite3.connect(gradingSubject.expectedOutputFile)
+
+    cursor = connection.cursor()
+    cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{gradingSubject.expectedOutputTable}';")
+    table_exists = cursor.fetchone()
+    if not table_exists:
+      print(f"\t[ERROR] Table {gradingSubject.expectedOutputTable} does not exist in {gradingSubject.expectedOutputFile}.")
+      connection.close()
+      gradedRubric = gradingSubject.rubricFactory()
+      grader.gradeMissingOutput(gradedRubric)
+      return
 
     try:
         query = f"SELECT * FROM {gradingSubject.expectedOutputTable}"
