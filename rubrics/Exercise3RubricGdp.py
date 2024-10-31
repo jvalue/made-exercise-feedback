@@ -53,7 +53,7 @@ def buildExercise3RubricGdp() -> GradingRubric:
         else:
             return 0
 
-    rubric = GradingRubric("Exercise 3")
+    rubric = GradingRubric()
 
     rubric.addCheck(
         "Shape",
