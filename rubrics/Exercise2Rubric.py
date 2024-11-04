@@ -66,7 +66,7 @@ def buildExercise2Rubric() -> GradingRubric:
         else:
             return 0
 
-    rubric = GradingRubric("Exercise 2")
+    rubric = GradingRubric()
 
     rubric.addCheck(
         "Shape",
