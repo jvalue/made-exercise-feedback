@@ -42,7 +42,7 @@ def buildExercise3RubricBondIssuance() -> GradingRubric:
         # Otherwise calling .min might error on strings
         df = df.apply(pd.to_numeric, errors="coerce")
 
-        if int(df[columns].min().min()) >= 0 and int(df[columns].max().max()) <= 1:
+        if float(df[columns].min().min()) >= 0 and float(df[columns].max().max()) <= 1:
             return 2
 
         return 0
