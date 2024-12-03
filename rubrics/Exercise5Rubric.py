@@ -15,7 +15,7 @@ def buildExercise5Rubric() -> GradingRubric:
             return 0
 
     def ensureRows(df: pd.DataFrame) -> int:
-        if len(df.index) == 62:
+        if len(df.index) == 55:
             return 2
         else:
             return 0
@@ -38,7 +38,7 @@ def buildExercise5Rubric() -> GradingRubric:
         return result
 
     def ensureZoneId(df: pd.DataFrame) -> int:
-        if "zone_id" in df.columns and (df["zone_id"] == 1645).all():
+        if "zone_id" in df.columns and (df["zone_id"] == 1925).all():
             return 2
         else:
             return 0
@@ -50,7 +50,7 @@ def buildExercise5Rubric() -> GradingRubric:
             return 0
 
     def ensureEncoding(df: pd.DataFrame) -> int:
-        if "Hünfeld Bahnhof" in df["stop_name"].values:
+        if "Rückers Eckenheim" in df["stop_name"].values:
             return 1
         return 0
 
